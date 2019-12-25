@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.serviceName }}-dep
+spec:
+  replicas: {{ .Values.replicas }}
+  selector:
+    matchLabels:
+      app: {{ .Values.serviceName }}-label
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.serviceName }}-label
+    spec:
+      containers:
+      - name: {{ .Values.serviceName }}-pod
+        image: {{ .Values.image }}
+        ports: 
+        - containerPort: {{ .Values.port }}
+{{- if or .Values.extraEnv .Values.global.extraEnv}}
+        env:
+{{- if .Values.extraEnv }}
+{{ toYaml .Values.extraEnv | indent 10 }}
+{{- end }}
+{{- if .Values.global.extraEnv }}
+{{ toYaml .Values.global.extraEnv | indent 10 }}
+{{- end }}
+{{- end }}

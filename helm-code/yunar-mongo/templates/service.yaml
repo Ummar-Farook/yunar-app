@@ -1,0 +1,14 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Values.serviceName }}-service
+spec:
+  selector:
+    app: {{ .Values.serviceName }}-label
+  ports:
+  - name: http
+    protocol: TCP
+    port: 27017
+    targetPort: 27017
+  type: LoadBalancer

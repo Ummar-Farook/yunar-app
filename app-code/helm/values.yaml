@@ -1,0 +1,19 @@
+# https://diogomonica.com/2017/03/27/why-you-shouldnt-use-env-variables-for-secret-data/
+# TODO encrypt below using https://github.com/bitnami-labs/sealed-secrets or other means
+
+
+global:
+  extraEnv:
+  - name: MONGO_INITDB_ROOT_USERNAME
+    value: starwars
+  - name: MONGO_INITDB_ROOT_PASSWORD
+    value: paving-duplex-connector-secluding-overreact-clobber
+
+yunar-app:
+  image: ummarece/yunar-app
+  port: 3000
+  extraEnv:
+  - name: MONGO_HOST
+    value: 'mongo-service'
+
+yunar-mongo: {}
