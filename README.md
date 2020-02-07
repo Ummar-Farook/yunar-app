@@ -17,6 +17,7 @@ helm repo add ummar https://ummar-farook.github.io/helm/
 
 ```sh
 cd app-code/helm/
+helm dep update
 helm install . --generate-name
 ```
 
